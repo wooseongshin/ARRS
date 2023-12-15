@@ -71,6 +71,11 @@ void reserveRide(int pinNumber, int rideId) {
     Ticket* ticket = getTicketByPin(pinNumber);
 
     if(ticket->magicPassUsageCount > 0) {
+        if (ride->status != Available) {
+            printf("현재 놀이기구가 운영중이 아닙니다. \n");
+            return;
+        }
+
         if(ride->reservedRiders >= ride->maxRiders) {
             printf("정원이 초과되어 예약할 수 없습니다. \n");
             return;
