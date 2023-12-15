@@ -15,7 +15,13 @@ void inputEnterAmusementPark() {
         scanf("%d", &pinNumber);
         if (enterAmusementPark(pinNumber)) {
             myTicket = getTicketByPin(pinNumber);
-            printf("%s님이 입장하였습니다.매직패스횟수 : %d\n\n", myTicket->userName, myTicket->magicPassUsageCount);
+            printf("%s님이 입장하였습니다. 매직패스횟수 : %d\n\n", myTicket->userName, myTicket->magicPassUsageCount);
+            printf("티켓 정보 \n");
+            printf("핀번호: %d \n", myTicket->pinNumber);
+            printf("이름: %s \n", myTicket->userName);
+            char* passTypeString = myTicket->passType == Daily ? "일일권" : "오후권";
+            printf("패스타입: %s \n\n", passTypeString);
+
             break;
         } else {
             printf("유효하지 않은 티켓입니다. 입장할 수 없습니다.\n");

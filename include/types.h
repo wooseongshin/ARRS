@@ -22,7 +22,7 @@ typedef enum {
 
 typedef struct {
     int pinNumber;
-    char* userName;
+    char userName[50];
     time_t usageDate;
     PassType passType;
     int magicPassUsageCount;
@@ -30,7 +30,7 @@ typedef struct {
 
 typedef struct {
     int id;
-    char* name;           // 놀이기구 이름
+    char name[50];           // 놀이기구 이름
     int maxRiders;        // 최대 탑승 인원
     int reservedRiders;   // 예약 인원
     RideStatus status;    // 놀이기구 상태

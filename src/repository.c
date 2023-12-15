@@ -20,7 +20,7 @@ void initRepository() {
 
 Ticket createTicket(char* userName,time_t usageDate, PassType passType, int magicPassUsageCount) {
     Ticket ticket;
-    ticket.userName = (char*)malloc(sizeof(char) * strlen(userName));
+    strcpy(ticket.userName, userName);
     ticket.pinNumber = repository.pinNumber++;
     ticket.usageDate = usageDate;
     ticket.passType = passType;
@@ -42,18 +42,18 @@ Ticket* getTicketByPin(int pinNumber) {
     return NULL;
 }
 
-Ride createRide(char* name,int maxRiders) {
+Ride createRide(char* name,int maxRiders, RideStatus status) {
     Ride ride = {0,};
     if (repository.rideId == DEFAULT_RIDE_COUNT) {
         printf("놀이기구를 더 이상 추가할 수 없습니다. \n");
         return ride;
     }
 
-    ride.name = (char*)malloc(sizeof(char) * strlen(name));
+    strcpy(ride.name, name);
     ride.id = repository.rideId++;
     ride.maxRiders = maxRiders;
     ride.reservedRiders = 0;
-    ride.status = Available;
+    ride.status = status;
     saveRide(ride);
     return ride;
 }

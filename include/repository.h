@@ -18,7 +18,7 @@ void initRepository();
 Ticket createTicket(char* userName, time_t usageDate,PassType passType, int magicPassUsageCount);
 void saveTicket(Ticket ticket);
 Ticket* getTicketByPin(int pinNumber);
-Ride createRide(char* name, int maxRiders);
+Ride createRide(char* name, int maxRiders, RideStatus status);
 void saveRide(Ride ride);
 Ride* getRideById(int rideId);
 Ride* getAllRides();

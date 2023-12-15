@@ -14,17 +14,19 @@ void printRideInfos() {
     Ride* rides = getAllRides();
 
     for(int i = 0; i <= repository->rideId; i++) {
+        printf("놀이기구 ID: %d \n", rides[i].id);
         printf("놀이기구 이름: %s \n", rides[i].name);
+        char* statusString = rides[i].status == Available ? "운영중" : "점검중";
         if (rides[i].status != Available){
-            printf("놀이기구 상태: %d \n", rides[i].status);
+            printf("놀이기구 상태: %s \n", statusString);
             printf("\n");
             continue;
         }
         printf("매직패스 인원: %d / %d \n",rides[i].reservedRiders ,rides[i].maxRiders);
         printf("예상 대기시간: %d분 \n", rides[i].reservedRiders * 5);
-        printf("놀이기구 상태: %d \n", rides[i].status);
+
+        printf("놀이기구 상태: %s \n", statusString);
         printf("\n");
-        i++;
     }
 }
 

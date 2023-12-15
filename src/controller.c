@@ -24,3 +24,4 @@ void httpRideReservation(RideReservationRequest* request) {
     //stub
     rideClient->send(request);
 }
+
