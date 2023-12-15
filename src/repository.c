@@ -73,10 +73,48 @@ Ride* getRideById(int rideId) {
     return NULL;
 }
 
-
 Ride* getAllRides() {
     return repository.rides;
 }
+
+void saveTicketsToFile(const char* filename, Ticket* tickets, size_t size) {
+    FILE* file = fopen(filename, "w");
+    if (file == NULL) {
+        perror("파일 열기 실패");
+        return;
+    }
+
+    for (size_t i = 1; i <= size; ++i) {
+        fprintf(file, "%d %s %lld %d %d\n", tickets[i].pinNumber, tickets[i].userName,
+                tickets[i].usageDate, tickets[i].passType, tickets[i].magicPassUsageCount);
+    }
+
+    fclose(file);
+}
+
+// 놀이기구 정보를 TXT 파일에 저장하는 함수
+void saveRidesToFile(const char* filename, Ride* rides, size_t size) {
+    FILE* file = fopen(filename, "w");
+    if (file == NULL) {
+        perror("파일 열기 실패");
+        return;
+    }
+
+    for (size_t i = 1; i <= size; ++i) {
+        fprintf(file, "%d %s %d %d %d\n", rides[i].id, rides[i].name, rides[i].maxRiders,
+                rides[i].reservedRiders, rides[i].status);
+    }
+
+    fclose(file);
+}
+
+// Repository의 모든 정보를 TXT 파일로 저장하는 함수
+void saveRepositoryToFile() {
+
+    saveTicketsToFile("../ticket.txt", repository.tickets, repository.pinNumber);
+    saveRidesToFile("../ride.txt", repository.rides, repository.rideId);
+}
+
 
 
 

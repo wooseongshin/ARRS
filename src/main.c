@@ -22,6 +22,8 @@ void scenario1() {
 
     reserveRide(0, 0);
     reserveRide(1, 0);
+
+    saveRepositoryToFile();
 }
 
 int main() {

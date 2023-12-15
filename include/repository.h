@@ -23,6 +23,7 @@ void saveRide(Ride ride);
 Ride* getRideById(int rideId);
 Ride* getAllRides();
 Repository* getRepository();
+void saveRepositoryToFile();
 
 #endif //REPOSITORY_H
 
