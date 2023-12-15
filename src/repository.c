@@ -16,6 +16,9 @@ void initRepository() {
     repository.pinNumber = 0;
     repository.size = 0;
     repository.capacity = REPOSITORY_INITIAL_CAPACITY;
+
+    getTicketsFromFile();
+    getRidesFromFile();
 }
 
 Ticket createTicket(char* userName,time_t usageDate, PassType passType, int magicPassUsageCount) {
@@ -78,7 +81,7 @@ Ride* getAllRides() {
 }
 
 void saveTicketsToFile(const char* filename, Ticket* tickets, size_t size) {
-    FILE* file = fopen(filename, "w");
+    FILE *file = fopen(filename, "w");
     if (file == NULL) {
         perror("파일 열기 실패");
         return;
@@ -110,13 +113,42 @@ void saveRidesToFile(const char* filename, Ride* rides, size_t size) {
 
 // Repository의 모든 정보를 TXT 파일로 저장하는 함수
 void saveRepositoryToFile() {
-
-    saveTicketsToFile("../ticket.txt", repository.tickets, repository.pinNumber);
-    saveRidesToFile("../ride.txt", repository.rides, repository.rideId);
+    saveTicketsToFile(TICKET_FILE_PATH, repository.tickets, repository.pinNumber);
+    saveRidesToFile(RIDE_FILE_PATH, repository.rides, repository.rideId);
 }
 
+void getTicketsFromFile() {
+    FILE* file = fopen("../ticket.txt", "r");
+    if (file == NULL) {
+        perror("파일 열기 실패");
+        return;
+    }
 
+    while (!feof(file)) {
+        Ticket ticket;
+        fscanf(file, "%d %s %lld %d %d\n", &ticket.pinNumber, ticket.userName,
+               &ticket.usageDate, &ticket.passType, &ticket.magicPassUsageCount);
+        createTicket(ticket.userName, ticket.usageDate, ticket.passType, ticket.magicPassUsageCount);
+    }
+    fclose(file);
+}
 
+void getRidesFromFile() {
+    FILE* file = fopen("../ride.txt", "r");
+    if (file == NULL) {
+        perror("파일 열기 실패");
+        return;
+    }
+
+    while (!feof(file)) {
+        Ride ride;
+        fscanf(file, "%d %s %d %d %d\n", &ride.id, ride.name, &ride.maxRiders,
+               &ride.reservedRiders, &ride.status);
+        createRide(ride.name, ride.maxRiders, ride.status);
+    }
+
+    fclose(file);
+}
 
 
 

@@ -24,6 +24,8 @@ Ride* getRideById(int rideId);
 Ride* getAllRides();
 Repository* getRepository();
 void saveRepositoryToFile();
+void getTicketsFromFile();
+void getRidesFromFile();
 
 #endif //REPOSITORY_H
 

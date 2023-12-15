@@ -6,4 +6,7 @@
 #define DEFAULT_RIDE_TIME 5
 #define DEFAULT_RIDE_COUNT 5
 #define REPOSITORY_INITIAL_CAPACITY 10
+#define TICKET_FILE_PATH "../tickets.txt"
+#define RIDE_FILE_PATH "../rides.txt"
+
 #endif //ARRS_CONSTANTS_H
