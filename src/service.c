@@ -13,7 +13,7 @@ void initService() {
 void printRideInfos() {
     Ride* rides = getAllRides();
 
-    for(int i = 0; i <= repository->rideId; i++) {
+    for(int i = 1; i <= repository->rideId; i++) {
         printf("놀이기구 ID: %d \n", rides[i].id);
         printf("놀이기구 이름: %s \n", rides[i].name);
         char* statusString = rides[i].status == Available ? "운영중" : "점검중";
