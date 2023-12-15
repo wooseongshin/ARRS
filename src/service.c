@@ -2,7 +2,7 @@
 #include "../include/types.h"
 #include "../include/repository.h"
 #include "../include/service.h"
-#include "../include/constants.h"
+#include "../include/controller.h"
 
 Repository* repository;
 
@@ -68,7 +68,6 @@ bool isValidDateTicket(Ticket* ticket) {
 
 void reserveRide(int pinNumber, int rideId) {
     Ride* ride = getRideById(rideId);
-
     Ticket* ticket = getTicketByPin(pinNumber);
 
     if(ticket->magicPassUsageCount > 0) {
@@ -76,6 +75,7 @@ void reserveRide(int pinNumber, int rideId) {
             printf("정원이 초과되어 예약할 수 없습니다. \n");
             return;
         }
+        httpReserveRide(pinNumber, rideId);
         ride->reservedRiders++;
     } else {
         printf("매직패스가 없습니다. \n");

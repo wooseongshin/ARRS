@@ -18,6 +18,7 @@ set(LIBRARY_HEADERS
         include/service.h
         include/constants.h
         include/input_interface.h
+        include/controller.h
 )
 
 # Create the library
