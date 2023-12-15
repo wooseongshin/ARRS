@@ -95,7 +95,6 @@ void saveTicketsToFile(const char* filename, Ticket* tickets, size_t size) {
     fclose(file);
 }
 
-// 놀이기구 정보를 TXT 파일에 저장하는 함수
 void saveRidesToFile(const char* filename, Ride* rides, size_t size) {
     FILE* file = fopen(filename, "w");
     if (file == NULL) {
@@ -111,7 +110,6 @@ void saveRidesToFile(const char* filename, Ride* rides, size_t size) {
     fclose(file);
 }
 
-// Repository의 모든 정보를 TXT 파일로 저장하는 함수
 void saveRepositoryToFile() {
     saveTicketsToFile(TICKET_FILE_PATH, repository.tickets, repository.pinNumber);
     saveRidesToFile(RIDE_FILE_PATH, repository.rides, repository.rideId);
@@ -150,6 +148,16 @@ void getRidesFromFile() {
     fclose(file);
 }
 
+void saveRideToDB(Ride ride) {
+    char* query = (char*)malloc(sizeof(char) * 100);
+    sprintf(query, "INSERT INTO rides (name, max_riders, reserved_riders, status) VALUES ('%s', %d, %d, %d);",
+            ride.name, ride.maxRiders, ride.reservedRiders, ride.status);
+}
 
+void saveTicketToDB(Ticket ticket) {
+    char* query = (char*)malloc(sizeof(char) * 100);
+    sprintf(query, "INSERT INTO tickets (pin_number, user_name, usage_date, pass_type, magic_pass_usage_count) VALUES (%d, '%s', %lld, %d, %d);",
+            ticket.pinNumber, ticket.userName, ticket.usageDate, ticket.passType, ticket.magicPassUsageCount);
+}
 
 
