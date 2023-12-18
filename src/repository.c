@@ -72,7 +72,7 @@ Ride* getRideById(int rideId) {
         }
     }
 
-    printf("해당 ID의 놀이기구가 없습니다. \n");
+
     return NULL;
 }
 

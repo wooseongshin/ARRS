@@ -13,6 +13,7 @@ void inputEnterAmusementPark() {
     while(myTicket == NULL) {
         printf("핀번호를 입력하세요: ");
         scanf("%d", &pinNumber);
+        printf("핀번호 %d로 입장을 시도합니다. \n", pinNumber);
         if (enterAmusementPark(pinNumber)) {
             myTicket = getTicketByPin(pinNumber);
             printf("%s님이 입장하였습니다. 매직패스횟수 : %d\n\n", myTicket->userName, myTicket->magicPassUsageCount);
@@ -32,6 +33,10 @@ void inputEnterAmusementPark() {
 
 void inputReservePage(int rideId) {
     Ride* ride = getRideById(rideId);
+    if(ride == NULL) {
+        printf("해당 ID의 놀이기구가 없습니다. \n");
+        return;
+    }
     printf("%s 를 예약 하시겠습니까? (Y/N) \n", ride->name);
     char answer;
     scanf(" %c", &answer);
@@ -56,3 +61,4 @@ void startCLI(){
         inputReserveRide();
     }
 }
+

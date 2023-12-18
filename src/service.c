@@ -31,7 +31,6 @@ void printRideInfos() {
 }
 
 bool enterAmusementPark(int pinNumber) {
-    printf("핀번호 %d로 입장을 시도합니다. \n", pinNumber);
     Ticket* ticket = getTicketByPin(pinNumber);
     if(ticket != NULL && isValidDateTicket(ticket)) {
         return true;
@@ -69,6 +68,10 @@ bool isValidDateTicket(Ticket* ticket) {
 void reserveRide(int pinNumber, int rideId) {
     Ride* ride = getRideById(rideId);
     Ticket* ticket = getTicketByPin(pinNumber);
+    if(ride == NULL) {
+        printf("해당 ID의 놀이기구가 없습니다. \n");
+        return;
+    }
 
     if(ticket->magicPassUsageCount > 0) {
         if (ride->status != Available) {
@@ -78,6 +81,7 @@ void reserveRide(int pinNumber, int rideId) {
 
         if(ride->reservedRiders >= ride->maxRiders) {
             printf("정원이 초과되어 예약할 수 없습니다. \n");
+
             return;
         }
         httpReserveRide(pinNumber, rideId);
